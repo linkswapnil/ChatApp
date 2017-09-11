@@ -1,0 +1,53 @@
+section {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 0;
+    display: flex;
+}
+ul#userlist {
+    background: #bbb;
+    flex-grow: 1;
+    list-style: none;
+    margin: 0;
+    padding: 5px;
+    border-right: 2px solid #ccc;
+}
+ul#userlist li {
+    padding: 0;
+}
+aside {
+    flex-grow: 5;
+    padding: 0;
+}
+aside h1 {
+    color: #345675;
+    margin: 0;
+    padding: 5px;
+}
+.chat-wrapper {
+    background: #ccc;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+}
+span.chat-user::after {
+    content: ': ';
+}
+input.chat-text {
+    float: left;
+    width: 80%;
+    padding: 5px;
+    margin: 0;
+    box-sizing: border-box;
+}
+aside button {
+    width: 20%;
+    float: left;
+    background: #333;
+    padding: 7px;
+    border: 1px solid;
+    color: #fff;
+    letter-spacing: 2px;
+    margin: 0;
+    text-align: center;
+}

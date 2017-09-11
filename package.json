@@ -1,0 +1,16 @@
+{
+  "name": "chatapp",
+  "version": "1.0.0",
+  "description": "simple chat app using socket.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4",
+    "redis": "^2.8.0",
+    "socket.io": "^2.0.3"
+  }
+}

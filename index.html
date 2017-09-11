@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<link>
+    <meta charset="UTF-8">
+    <title>My chat App</title>
+    <style>
+        section {
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 0;
+            display: flex;
+        }
+        ul#userList {
+            background: lightgray;
+            flex-grow: 1;
+            list-style: none;
+            margin: 0;
+            padding: 5px;
+            border-right: 2px solid #ccc;
+        }
+        ul#userList li {
+            padding: 0;
+        }
+        aside {
+            flex-grow: 5;
+            padding: 0;
+        }
+        aside h1 {
+            color: #345675;
+            margin: 0;
+            padding: 5px;
+        }
+        .chat-wrapper {
+            background: lightgray;
+            border-radius: 5px;
+            margin: 5px;
+            padding: 5px;
+        }
+        span.chat-user::after {
+            content: ': ';
+        }
+        input.chat-text {
+            float: left;
+            width: 80%;
+            padding: 5px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        aside button {
+            width: 20%;
+            float: left;
+            background: #333;
+            padding: 7px;
+            border: 1px solid;
+            color: #fff;
+            letter-spacing: 2px;
+            margin: 0;
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src ="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+</head>
+<body>
+<h1> Welcome to My Chat App </h1>
+<section>
+    <ul id="userList">
+    </ul>
+    <aside>
+        <form id="chatForm">
+            <h1 id="status"></h1>
+            <p id="chatMessages"></p>
+            <div class="chat-input">
+                <input type="text" id="chatInput" class="chat-text"><button type="submit">SEND</button>
+            </div>
+        </form>
+    </aside>
+</section>
+</body>
+<script type="text/javascript">
+    var myIP = 'localhost';
+    var socket = io.connect('http://'+ myIP +':9000');
+    var name;
+    socket.on('connect', function () {
+       $("#status").html("Connected to chattr");
+       name = prompt("What is your name");
+        socket.emit('join', name)
+    });
+    socket.on('messages', function (message) {
+        console.log(message);
+        $('#chatMessages').append("<p class='chat-wrapper'>"+ message + "</p>")
+    });
+
+    socket.on('add chatter', function(name) {
+        var chatter = $('<li>'+name+'</li>').data('name', name);
+        $('#userList').append(chatter);
+    });
+
+    $('#chatForm').submit(function(e){
+        var message = $('#chatInput').val();
+        socket.emit('messages', message);
+        e.preventDefault();
+        $('#chatInput').val('');
+    });
+
+</script>
+</html>
+
